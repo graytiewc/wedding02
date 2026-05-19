@@ -1,0 +1,512 @@
+* {
+  box-sizing: border-box;
+}
+html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background: #f5efe8;
+  overflow-x: hidden;
+  overflow: hidden;
+}
+body {
+  --stage-width: 100vw;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow: hidden;
+  background: #f5efe8;
+  font-family: system-ui, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+#landing {
+  position: relative;
+  width: var(--stage-width);
+  height: calc(var(--stage-width) * 2.166);
+  max-height: 100vh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  transform-origin: center center;
+  transition: opacity 1s ease;
+  background: #f5efe8;
+}
+#landing img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+#envolope {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+.cartoon-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  z-index: 2;
+  transition: transform 0.95s cubic-bezier(0.72, 0, 0.24, 1), opacity 0.95s ease;
+}
+.cartoon-frame.active {
+  opacity: 1;
+}
+#flap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 3;
+  transition: transform 0.95s cubic-bezier(0.72, 0, 0.24, 1), opacity 0.95s ease;
+}
+#sealButton {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  background: transparent;
+  padding: 0;
+  z-index: 4;
+  cursor: pointer;
+  transition: transform 0.95s cubic-bezier(0.72, 0, 0.24, 1), opacity 0.95s ease;
+}
+#seal {
+  width: min(144px, 37.8vw);
+  transform: scale(1.1);
+  transition: transform 0.2s ease, opacity 0.8s ease;
+  animation: sealPulse 2s ease-in-out infinite;
+}
+#sealButton:hover #seal {
+  transform: scale(1.15);
+}
+@keyframes sealPulse {
+  0%, 100% {
+    transform: scale(1.1) translateY(0);
+  }
+  50% {
+    transform: scale(1.2) translateY(6%);
+  }
+}
+#fireworks {
+  display: none;
+}
+#mainView {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: var(--stage-width);
+  height: 100%;
+  background: #f5efe8;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease-in-out;
+  z-index: 10;
+}
+#mainView::-webkit-scrollbar {
+  display: none;
+}
+.main-stage {
+  position: relative;
+  width: 100%;
+  flex: 0 0 auto;
+  overflow: hidden;
+}
+
+@media (min-width: 481px) {
+  body {
+    --stage-width: 375px;
+  }
+}
+.main-stage > img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+#bgmToggle {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease, filter 0.18s ease;
+}
+body.main-open #bgmToggle {
+  opacity: 1;
+  pointer-events: auto;
+}
+#bgmToggle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+#bgmToggle.is-muted {
+  filter: grayscale(1);
+}
+#bgmToggle:active {
+  transform: scale(0.92);
+}
+.thank-you-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(61, 43, 24, 0.34);
+}
+.thank-you-modal[hidden] {
+  display: none;
+}
+.thank-you-card {
+  position: relative;
+  width: min(86vw, 330px);
+  padding: 28px 22px 22px;
+  border: 1px solid rgba(149, 125, 94, 0.28);
+  border-radius: 16px;
+  background: rgba(255, 250, 244, 0.98);
+  box-shadow: 0 22px 50px rgba(61, 43, 24, 0.22);
+  color: #3d2b18;
+  text-align: center;
+}
+.thank-you-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  background: transparent;
+  color: #8b7258;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+.thank-you-icon {
+  width: 54px;
+  height: 54px;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #d4b18f;
+  color: #fff;
+  font-size: 30px;
+  font-weight: 700;
+}
+.thank-you-title {
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 700;
+}
+.thank-you-text {
+  color: #7f6a54;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.thank-you-ok {
+  width: 100%;
+  margin-top: 18px;
+  border: none;
+  border-radius: 999px;
+  padding: 11px 16px;
+  background: #3d2b18;
+  color: #fff7ef;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.thank-you-close:active,
+.thank-you-ok:active {
+  transform: scale(0.96);
+}
+#countdown {
+  position: absolute;
+  top: 19.95%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(88%, 340px);
+  padding: 8px 12px;
+
+  z-index: 12;
+  text-align: center;
+}
+#countdown-label {
+  display: none;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+#countdown-values {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+.countdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 42px;
+}
+.countdown-number {
+  font-size: 1.62rem;
+  font-weight: 700;
+  color: #2c1b0e;
+}
+#rsvpPanel {
+  position: relative;
+  width: min(90%, 340px);
+  margin: 18px auto 36px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+  z-index: 12;
+  color: #3d2b18;
+}
+.rsvp-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.rsvp-field {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.rsvp-field span {
+  color: #7f6a54;
+}
+.rsvp-field input,
+.rsvp-field textarea {
+  width: 100%;
+  border: 1px solid rgba(149, 125, 94, 0.4);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #3d2b18;
+  font-size: 14px;
+}
+.rsvp-field textarea {
+  resize: vertical;
+}
+.rsvp-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.rsvp-actions button {
+  flex: 1 1 45%;
+  min-width: 120px;
+  border: none;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+#rsvpSubmit {
+  background: #d4b18f;
+  color: #fff;
+}
+#viewBlessings {
+  background: #f8f4ef;
+  color: #4f3a25;
+  border: 1px solid rgba(79, 58, 37, 0.18);
+}
+.blessings-panel {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(149, 125, 94, 0.22);
+}
+.blessings-panel[hidden] {
+  display: none;
+}
+.blessings-header {
+  margin-bottom: 8px;
+  color: #4f3a25;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+.total-attendees {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(212, 177, 143, 0.18);
+  color: #4f3a25;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+.blessings-list {
+  display: grid;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+.blessings-item {
+  padding: 10px 12px;
+  border: 1px solid rgba(149, 125, 94, 0.22);
+  border-radius: 8px;
+  background: rgba(248, 244, 239, 0.82);
+}
+.blessings-meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 5px;
+  color: #3d2b18;
+  font-size: 12px;
+}
+.blessings-meta strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.blessings-meta span,
+.blessings-empty {
+  color: #7f6a54;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.blessings-message {
+  color: #4f3a25;
+  font-size: 12px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+#rsvpSubmit:active,
+#viewBlessings:active {
+  transform: translateY(1px);
+}
+.countdown-unit {
+  font-size: 0.8rem;
+  color: #7d6a55;
+  margin-top: 4px;
+}
+.btn-contact-test {
+  position: absolute;
+  top: 93%;
+  left: 10%;
+  width: 29%;
+  height: auto;
+  z-index: 11;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-contact-test-right {
+  position: absolute;
+  top: 93%;
+  left: 60%;
+  width: 29%;
+  height: auto;
+  z-index: 11;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-location {
+  position: absolute;
+  top: 83%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 59%;
+  height: auto;
+  z-index: 11;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-photo {
+  position: absolute;
+  top: 97.5%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  width: 69%;
+  height: auto;
+  z-index: 11;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.btn-contact-test img,
+.btn-contact-test-right img,
+.btn-location img,
+.btn-photo img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.btn-contact-test:active,
+.btn-contact-test-right:active {
+  transform: scale(0.95);
+  filter: brightness(0.92);
+}
+.btn-location:active,
+.btn-photo:active {
+  transform: translateX(-50%) scale(0.95);
+  filter: brightness(0.92);
+}
+.zoomed {
+  animation: zoomIn 0.45s cubic-bezier(0.2, 0.9, 0.2, 1) forwards;
+}
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+    filter: blur(0);
+  }
+  60% {
+    transform: scale(1.18);
+    filter: blur(0);
+  }
+  100% {
+    transform: scale(1.62);
+    filter: blur(1px);
+  }
+}
+.slide-right {
+  opacity: 1;
+}
+#sealButton.slide-right {
+  transform: translate(-50%, -50%);
+}
+#sealButton.seal-zoom {
+  transform: translate(-50%, -50%) scale(3.2);
+  opacity: 0;
+}
+.show-main {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
