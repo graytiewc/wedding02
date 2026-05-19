@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wedding Invitation</title>
+  <meta name="description" content="You are warmly invited to celebrate our wedding." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://wedding02-xi.vercel.app/" />
+  <meta property="og:title" content="Wedding Invitation" />
+  <meta property="og:description" content="You are warmly invited to celebrate our wedding." />
+  <meta property="og:image" content="https://wedding02-xi.vercel.app/images/preview.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Wedding Invitation" />
+  <meta name="twitter:description" content="You are warmly invited to celebrate our wedding." />
+  <meta name="twitter:image" content="https://wedding02-xi.vercel.app/images/preview.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="landing">
+    <img id="envolope" src="images/envolopebase.png" alt="Envelope Base" />
+    <img id="cartoon1" class="cartoon-frame active" src="images/cartoon1.png" alt="Cartoon Frame 1" />
+    <img id="cartoon2" class="cartoon-frame" src="images/cartoon2.png" alt="Cartoon Frame 2" />
+    <img id="flap" src="images/flap.png" alt="Envelope Flap" />
+    <button id="sealButton" aria-label="Open Seal">
+      <img id="seal" src="images/seal.png" alt="Seal" />
+    </button>
+    <div id="fireworks" aria-hidden="true"></div>
+  </div>
+
+  <div id="mainView">
+    <div class="main-stage">
+      <img src="images/main.png" alt="Main Page" />
+      <div id="countdown" aria-label="Countdown">
+        <span id="countdown-label">Countdown</span>
+        <div id="countdown-values">
+          <span class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-unit">days</span></span>
+          <span class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-unit">hours</span></span>
+          <span class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-unit">minutes</span></span>
+          <span class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-unit">seconds</span></span>
+        </div>
+      </div>
+      <a class="btn-contact-test" href="javascript:void(0)" aria-label="Contact Button Left">
+        <img src="images/contactbt.png" alt="Contact" />
+      </a>
+      <a class="btn-contact-test-right" href="javascript:void(0)" aria-label="Contact Button Right">
+        <img src="images/contactbt.png" alt="Contact" />
+      </a>
+      <a class="btn-location" href="javascript:void(0)" aria-label="Location Button">
+        <img src="images/locationbt.png" alt="Location" />
+      </a>
+      <a class="btn-photo" href="javascript:void(0)" aria-label="Photo Button">
+        <img src="images/photobt.png" alt="Photo" />
+      </a>
+    </div>
+    <div id="rsvpPanel">
+      <div class="rsvp-title">RSVP</div>
+      <label class="rsvp-field">
+        <span>Name
+        </span>
+        <input id="rsvp-name" type="text" placeholder="Name" />
+      </label>
+      <label class="rsvp-field">
+        <span>Number of Guests</span>
+        <input id="rsvp-guest" type="number" min="1" placeholder="1" />
+      </label>
+      <label class="rsvp-field">
+        <span>Send Your Wishes</span>
+        <textarea id="rsvp-message" rows="3" placeholder="Send Your Wishes"></textarea>
+      </label>
+      <div class="rsvp-actions">
+        <button id="rsvpSubmit" type="button">Send</button>
+        <button id="viewBlessings" type="button">Guest Wishes</button>
+      </div>
+      <div id="blessingsPanel" class="blessings-panel" hidden>
+        <div class="blessings-header">Guest Wishes</div>
+        <div id="totalAttendees" class="total-attendees">Total Attendees: 0</div>
+        <div id="blessingsList" class="blessings-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <button id="bgmToggle" type="button" aria-label="Toggle Music">
+    <img src="images/bgmbt.png" alt="Music" />
+  </button>
+
+  <div id="thankYouModal" class="thank-you-modal" hidden>
+    <div class="thank-you-card" role="dialog" aria-modal="true" aria-labelledby="thankYouTitle">
+      <button id="thankYouClose" class="thank-you-close" type="button" aria-label="Close">×</button>
+      <div class="thank-you-icon">✓</div>
+      <div id="thankYouTitle" class="thank-you-title">Thank You!</div>
+      <div class="thank-you-text">Your RSVP has been received.<br>Thank you for your wishes.</div>
+      <button id="thankYouOk" class="thank-you-ok" type="button">OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
